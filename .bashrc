@@ -146,9 +146,9 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     if [ $(id -u) -eq 0 ]; then
-      PS1='${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IRed}\u@${IGreen}\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
+      PS1='\[${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IRed}\u@${IGreen}\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
     else
-      PS1='${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IGreen}\u@\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
+      PS1='\[${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IGreen}\u@\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
     fi
 else
     PS1='$(__git_ps1)${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
