@@ -1,90 +1,21 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Colors
-None=$'\e[0m'       # Reset
-
-# Regular Colors
-Black=$'\e[0;30m'        # Black
-Red=$'\e[0;31m'          # Red
-Green=$'\e[0;32m'        # Green
-Yellow=$'\e[0;33m'       # Yellow
-Blue=$'\e[0;34m'         # Blue
-Purple=$'\e[0;35m'       # Purple
-Cyan=$'\e[0;36m'         # Cyan
-White=$'\e[0;37m'        # White
-
-# Bold
-BBlack=$'\e[1;30m'       # Black
-BRed=$'\e[1;31m'         # Red
-BGreen=$'\e[1;32m'       # Green
-BYellow=$'\e[1;33m'      # Yellow
-BBlue=$'\e[1;34m'        # Blue
-BPurple=$'\e[1;35m'      # Purple
-BCyan=$'\e[1;36m'        # Cyan
-BWhite=$'\e[1;37m'       # White
-BNone=$'\e[1;00m'        # Bold None
-
-# Underline
-UBlack=$'\e[4;30m'       # Black
-URed=$'\e[4;31m'         # Red
-UGreen=$'\e[4;32m'       # Green
-UYellow=$'\e[4;33m'      # Yellow
-UBlue=$'\e[4;34m'        # Blue
-UPurple=$'\e[4;35m'      # Purple
-UCyan=$'\e[4;36m'        # Cyan
-UWhite=$'\e[4;37m'       # White
-UNone=$'\e[4;37m'        # Underline None
-
-# Underline High Intensity
-UIBlack=$'\e[4;90m'       # Black
-UIRed=$'\e[4;91m'         # Red
-UIGreen=$'\e[4;92m'       # Green
-UIYellow=$'\e[4;93m'      # Yellow
-UIBlue=$'\e[4;94m'        # Blue
-UIPurple=$'\e[4;95m'      # Purple
-UICyan=$'\e[4;96m'        # Cyan
-UIWhite=$'\e[4;97m'       # White
-
-# Background
-On_Black=$'\e[40m'       # Black
-On_Red=$'\e[41m'         # Red
-On_Green=$'\e[42m'       # Green
-On_Yellow=$'\e[43m'      # Yellow
-On_Blue=$'\e[44m'        # Blue
-On_Purple=$'\e[45m'      # Purple
-On_Cyan=$'\e[46m'        # Cyan
-On_White=$'\e[47m'       # White
-
-# High Intensity
-IBlack=$'\e[0;90m'       # Black
-IRed=$'\e[0;91m'         # Red
-IGreen=$'\e[0;92m'       # Green
-IYellow=$'\e[0;93m'      # Yellow
-IBlue=$'\e[0;94m'        # Blue
-IPurple=$'\e[0;95m'      # Purple
-ICyan=$'\e[0;96m'        # Cyan
-IWhite=$'\e[0;97m'       # White
-
-# Bold High Intensity
-BIBlack=$'\e[1;90m'      # Black
-BIRed=$'\e[1;91m'        # Red
-BIGreen=$'\e[1;92m'      # Green
-BIYellow=$'\e[1;93m'     # Yellow
-BIBlue=$'\e[1;94m'       # Blue
-BIPurple=$'\e[1;95m'     # Purple
-BICyan=$'\e[1;96m'       # Cyan
-BIWhite=$'\e[1;97m'      # White
-
-# High Intensity backgrounds
-On_IBlack=$'\e[0;100m'   # Black
-On_IRed=$'\e[0;101m'     # Red
-On_IGreen=$'\e[0;102m'   # Green
-On_IYellow=$'\e[0;103m'  # Yellow
-On_IBlue=$'\e[0;104m'    # Blue
-On_IPurple=$'\e[10;95m'  # Purple
-On_ICyan=$'\e[0;106m'    # Cyan
-On_IWhite=$'\e[0;107m'   # White
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+LIME_YELLOW=$(tput setaf 190)
+YELLOW=$(tput setaf 3)
+POWDER_BLUE=$(tput setaf 153)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+BRIGHT=$(tput bold)
+NORMAL=$(tput sgr0)
+BLINK=$(tput blink)
+REVERSE=$(tput smso)
+UNDERLINE=$(tput smul)
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -146,9 +77,9 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     if [ $(id -u) -eq 0 ]; then
-      PS1='\[${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IRed}\u@${IGreen}\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
+      PS1='\[${BRIGHT}\]\[${CYAN}\]$(__git_ps1)\[${NORMAL}\]${debian_chroot:+($debian_chroot)}\[${BRIGHT}\]\[${RED}\]\u@\[${GREEN}\]\h\[${NORMAL}\]:\[${BRIGHT}\]\[${BLUE}\]\w\[$(if [ $ecode -eq 0 ]; then printf $NORMAL; else printf $RED; fi)\]\$\[${NORMAL}\] '
     else
-      PS1='\[${ICyan}$(__git_ps1)${None}${debian_chroot:+($debian_chroot)}${IGreen}\u@\h${None}:${IBlue}\w$(if [ $ecode -eq 0 ]; then printf $None\$; else printf $Red\$$None; fi) '
+      PS1='\[${BRIGHT}\]\[${CYAN}\]$(__git_ps1)\[${NORMAL}\]${debian_chroot:+($debian_chroot)}\[${BRIGHT}\]\[${GREEN}\]\u@\h\[${NORMAL}\]:\[${BRIGHT}\]\[${BLUE}\]\w\[$(if [ $ecode -eq 0 ]; then printf $NORMAL; else printf $RED; fi)\]\$\[${NORMAL}\] '
     fi
 else
     PS1='$(__git_ps1)${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -404,3 +335,97 @@ _loghistory() {
     # save the entry in a logfile
     echo "$histentrycmd" >> $logfile || echo "$script: file error." ; return 1
 }
+
+## Color Table
+## .................................................................................................... ##
+Normal () { printf '\e[m'"$*"; }                  ; Tblack () { printf '\e[0;30m'"$*"'\e[m'; }
+TNormal () { printf '\e[m'"$*"; }                 ; Tred () { printf '\e[0;31m'"$*"'\e[m'; }
+Bold () { printf '\e[1m'"$*"'\e[m'; }             ; Tgreen () { printf '\e[0;32m'"$*"'\e[m'; }
+TBold () { printf '\e[1m'"$*"'\e[m'; }            ; Tbrown () { printf '\e[0;33m'"$*"'\e[m'; }
+Underline () { printf '\e[4m'"$*"'\e[m'; }        ; Tyellow () { printf '\e[0;33m'"$*"'\e[m'; }
+TUnderline () { printf '\e[4m'"$*"'\e[m'; }       ; Tblue () { printf '\e[0;34m'"$*"'\e[m'; }
+Flash () { printf '\e[5m'"$*"'\e[m'; }            ; Tmagenta () { printf '\e[0;35m'"$*"'\e[m'; }
+TFlash () { printf '\e[5m'"$*"'\e[m'; }           ; Tpurple () { printf '\e[0;35m'"$*"'\e[m'; }
+Invert () { printf '\e[7m'"$*"'\e[m'; }           ; Taqua () { printf '\e[0;36m'"$*"'\e[m'; }
+TInvert () { printf '\e[7m'"$*"'\e[m'; }          ; Tcyan () { printf '\e[0;36m'"$*"'\e[m'; }
+Invisible () { printf '\e[8m'"$*"'\e[m'; }        ; Tgrey () { printf '\e[0;37m'"$*"'\e[m'; }
+TInvisible () { printf '\e[8m'"$*"'\e[m'; }       ; Twhite () { printf '\e[0;37m'"$*"'\e[m'; }
+## ............... Bold Color Text ................ ## ............ Underlined Color Text ............. ##
+TblackB () { printf '\e[1;30m'"$*"'\e[m'; }       ; TblackU () { printf '\e[4;30m'"$*"'\e[m'; }
+TgreyB () { printf '\e[1;30m'"$*"'\e[m'; }        ; TredU () { printf '\e[4;31m'"$*"'\e[m'; }
+TredB () { printf '\e[1;31m'"$*"'\e[m'; }         ; TgreenU () { printf '\e[4;32m'"$*"'\e[m'; }
+TgreenB () { printf '\e[1;32m'"$*"'\e[m'; }       ; TbrownU () { printf '\e[4;33m'"$*"'\e[m'; }
+TbrownB () { printf '\e[1;33m'"$*"'\e[m'; }       ; TyellowU () { printf '\e[4;33m'"$*"'\e[m'; }
+TyellowB () { printf '\e[1;33m'"$*"'\e[m'; }      ; TblueU () { printf '\e[4;34m'"$*"'\e[m'; }
+TblueB () { printf '\e[1;34m'"$*"'\e[m'; }        ; TmagentaU () { printf '\e[4;35m'"$*"'\e[m'; }
+TmagentaB () { printf '\e[1;35m'"$*"'\e[m'; }     ; TpurpleU () { printf '\e[4;35m'"$*"'\e[m'; }
+TpurpleB () { printf '\e[1;35m'"$*"'\e[m'; }      ; TaquaU () { printf '\e[4;36m'"$*"'\e[m'; }
+TaquaB () { printf '\e[1;36m'"$*"'\e[m'; }        ; TcyanU () { printf '\e[4;36m'"$*"'\e[m'; }
+TcyanB () { printf '\e[1;36m'"$*"'\e[m'; }        ; TgreyU () { printf '\e[4;37m'"$*"'\e[m'; }
+TwhiteB () { printf '\e[1;37m'"$*"'\e[m'; }       ; TwhiteU () { printf '\e[4;37m'"$*"'\e[m'; }
+## ............. Flashing Color Text .............. ## ............. Inverted Color Text .............. ##
+TblackF () { printf '\e[5;30m'"$*"'\e[m'; }       ; TblackI () { printf '\e[7;40m'"$*"'\e[m'; }
+TredF () { printf '\e[5;31m'"$*"'\e[m'; }         ; TredI () { printf '\e[7;41m'"$*"'\e[m'; }
+TgreenF () { printf '\e[5;32m'"$*"'\e[m'; }       ; TgreenI () { printf '\e[7;42m'"$*"'\e[m'; }
+TbrownF () { printf '\e[5;33m'"$*"'\e[m'; }       ; TbrownI () { printf '\e[7;43m'"$*"'\e[m'; }
+TyellowF () { printf '\e[5;33m'"$*"'\e[m'; }      ; TyellowI () { printf '\e[7;43m'"$*"'\e[m'; }
+TblueF () { printf '\e[5;34m'"$*"'\e[m'; }        ; TblueI () { printf '\e[7;44m'"$*"'\e[m'; }
+TmagentaF () { printf '\e[5;35m'"$*"'\e[m'; }     ; TmagentaI () { printf '\e[7;45m'"$*"'\e[m'; }
+TpurpleF () { printf '\e[5;35m'"$*"'\e[m'; }      ; TpurpleI () { printf '\e[7;45m'"$*"'\e[m'; }
+TaquaF () { printf '\e[5;36m'"$*"'\e[m'; }        ; TaquaI () { printf '\e[7;46m'"$*"'\e[m'; }
+TcyanF () { printf '\e[5;36m'"$*"'\e[m'; }        ; TcyanI () { printf '\e[7;46m'"$*"'\e[m'; }
+TgreyF () { printf '\e[5;37m'"$*"'\e[m'; }        ; TgreyI () { printf '\e[7;47m'"$*"'\e[m'; }
+TwhiteF () { printf '\e[5;37m'"$*"'\e[m'; }       ; TwhiteI () { printf '\e[7;47m'"$*"'\e[m'; }
+## ............. Invisible Color Text ............. ## ........ Plain Text on Color Background ........ ##
+TblackV () { printf '\e[8;30m'"$*"'\e[m'; }       ; Bblack () { printf '\e[m'"$*"'\e[m'; }
+TredV () { printf '\e[8;31m'"$*"'\e[m'; }         ; Bred () { printf '\e[0;41m'"$*"'\e[m'; }
+TgreenV () { printf '\e[8;32m'"$*"'\e[m'; }       ; Bgreen () { printf '\e[0;42m'"$*"'\e[m'; }
+TbrownV () { printf '\e[8;33m'"$*"'\e[m'; }       ; Bbrown () { printf '\e[0;43m'"$*"'\e[m'; }
+TyellowV () { printf '\e[8;33m'"$*"'\e[m'; }      ; Byellow () { printf '\e[0;43m'"$*"'\e[m'; }
+TblueV () { printf '\e[8;34m'"$*"'\e[m'; }        ; Bblue () { printf '\e[0;44m'"$*"'\e[m'; }
+TmagentaV () { printf '\e[8;35m'"$*"'\e[m'; }     ; Bmagenta () { printf '\e[0;45m'"$*"'\e[m'; }
+TpurpleV () { printf '\e[8;35m'"$*"'\e[m'; }      ; Bpurple () { printf '\e[0;45m'"$*"'\e[m'; }
+TaquaV () { printf '\e[8;36m'"$*"'\e[m'; }        ; Baqua () { printf '\e[0;46m'"$*"'\e[m'; }
+TcyanV () { printf '\e[8;36m'"$*"'\e[m'; }        ; Bcyan () { printf '\e[0;46m'"$*"'\e[m'; }
+TgreyV () { printf '\e[8;37m'"$*"'\e[m'; }        ; Bgrey () { printf '\e[0;47m'"$*"'\e[m'; }
+TwhiteV () { printf '\e[8;37m'"$*"'\e[m'; }       ; Bwhite () { printf '\e[0;47m'"$*"'\e[m'; }
+## ......... Bold Text on Color Background ........ ## ...... Underlined Text on Color Background ..... ##
+BblackB () { printf '\e[1;40m'"$*"'\e[m'; }       ; BblackU () { printf '\e[4;40m'"$*"'\e[m'; }
+BredB () { printf '\e[1;41m'"$*"'\e[m'; }         ; BredU () { printf '\e[4;41m'"$*"'\e[m'; }
+BgreenB () { printf '\e[1;42m'"$*"'\e[m'; }       ; BgreenU () { printf '\e[4;42m'"$*"'\e[m'; }
+BbrownB () { printf '\e[1;43m'"$*"'\e[m'; }       ; BbrownU () { printf '\e[4;43m'"$*"'\e[m'; }
+ByellowB () { printf '\e[1;43m'"$*"'\e[m'; }      ; ByellowU () { printf '\e[4;43m'"$*"'\e[m'; }
+BblueB () { printf '\e[1;44m'"$*"'\e[m'; }        ; BblueU () { printf '\e[4;44m'"$*"'\e[m'; }
+BmagentaB () { printf '\e[1;45m'"$*"'\e[m'; }     ; BmagentaU () { printf '\e[4;45m'"$*"'\e[m'; }
+BpurpleB () { printf '\e[1;45m'"$*"'\e[m'; }      ; BpurpleU () { printf '\e[4;45m'"$*"'\e[m'; }
+BaquaB () { printf '\e[1;46m'"$*"'\e[m'; }        ; BaquaU () { printf '\e[4;46m'"$*"'\e[m'; }
+BcyanB () { printf '\e[1;46m'"$*"'\e[m'; }        ; BcyanU () { printf '\e[4;46m'"$*"'\e[m'; }
+BgreyB () { printf '\e[1;47m'"$*"'\e[m'; }        ; BgreyU () { printf '\e[4;47m'"$*"'\e[m'; }
+BwhiteB () { printf '\e[1;47m'"$*"'\e[m'; }       ; BwhiteU () { printf '\e[4;47m'"$*"'\e[m'; }
+## ....... Flashing Text on Color Background ...... ## ....... Inverted Text on Color Background ...... ##
+BblackF () { printf '\e[5;40m'"$*"'\e[m'; }       ; BblackI () { printf '\e[7;30m'"$*"'\e[m'; }
+BredF () { printf '\e[5;41m'"$*"'\e[m'; }         ; BredI () { printf '\e[7;31m'"$*"'\e[m'; }
+BgreenF () { printf '\e[5;42m'"$*"'\e[m'; }       ; BgreenI () { printf '\e[7;32m'"$*"'\e[m'; }
+BbrownF () { printf '\e[5;43m'"$*"'\e[m'; }       ; BbrownI () { printf '\e[7;33m'"$*"'\e[m'; }
+ByellowF () { printf '\e[5;43m'"$*"'\e[m'; }      ; ByellowI () { printf '\e[7;33m'"$*"'\e[m'; }
+BblueF () { printf '\e[5;44m'"$*"'\e[m'; }        ; BblueI () { printf '\e[7;34m'"$*"'\e[m'; }
+BmagentaF () { printf '\e[5;45m'"$*"'\e[m'; }     ; BmagentaI () { printf '\e[7;35m'"$*"'\e[m'; }
+BpurpleF () { printf '\e[5;45m'"$*"'\e[m'; }      ; BpurpleI () { printf '\e[7;35m'"$*"'\e[m'; }
+BaquaF () { printf '\e[5;46m'"$*"'\e[m'; }        ; BaquaI () { printf '\e[7;36m'"$*"'\e[m'; }
+BcyanF () { printf '\e[5;46m'"$*"'\e[m'; }        ; BcyanI () { printf '\e[7;36m'"$*"'\e[m'; }
+BgreyF () { printf '\e[5;47m'"$*"'\e[m'; }        ; BgreyI () { printf '\e[7;37m'"$*"'\e[m'; }
+BwhiteF () { printf '\e[5;47m'"$*"'\e[m'; }       ; BwhiteI () { printf '\e[7;37m'"$*"'\e[m'; }
+## ...... Invisible Text on Color Background ...... ## ............... Color Code Notes ............... ##
+BblackV () { printf '\e[8;40m'"$*"'\e[m'; }
+BredV () { printf '\e[8;41m'"$*"'\e[m'; }
+BgreenV () { printf '\e[8;42m'"$*"'\e[m'; }
+BbrownV () { printf '\e[8;43m'"$*"'\e[m'; }
+ByellowV () { printf '\e[8;43m'"$*"'\e[m'; }
+BblueV () { printf '\e[8;44m'"$*"'\e[m'; }
+BmagentaV () { printf '\e[8;45m'"$*"'\e[m'; }
+BpurpleV () { printf '\e[8;45m'"$*"'\e[m'; }
+BaquaV () { printf '\e[8;46m'"$*"'\e[m'; }
+BcyanV () { printf '\e[8;46m'"$*"'\e[m'; }
+BgreyV () { printf '\e[8;47m'"$*"'\e[m'; }
+BwhiteV () { printf '\e[8;47m'"$*"'\e[m'; }
+## .................................................................................................... ##
