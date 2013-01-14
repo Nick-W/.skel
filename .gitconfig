@@ -1,0 +1,10 @@
+[user]
+email = nick.wilson@sparkfun.com
+name = Nick-W
+
+[merge]
+tool = mymeld
+conflictstyle = diff3
+
+[mergetool "mymeld"]
+cmd = meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $BASE $REMOTE $MERGED

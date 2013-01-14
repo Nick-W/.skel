@@ -17,6 +17,10 @@ BLINK=$(tput blink)
 REVERSE=$(tput smso)
 UNDERLINE=$(tput smul)
 
+#Aliases
+alias vim="vim -X"
+alias hc="echo | tee ~/.bash_history | tee ~/.bash_log"
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 #HISTCONTROL=ignoredups:ignorespace
