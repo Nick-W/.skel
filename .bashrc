@@ -33,7 +33,7 @@ shopt -s histappend
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # write history out immediately
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+#export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # enable advanced history, found in ~/.bash_log
 export PROMPT_COMMAND="_loghistory; $PROMPT_COMMAND"

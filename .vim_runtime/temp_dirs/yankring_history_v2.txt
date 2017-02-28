@@ -1,3 +1,6 @@
+        <device id="QTSI7XS-WGB6RIJ-VGQRLNL-HRN5J4Y-JDBDX3R-QAZPH2A-6VVHNH7-AL6SRQN" introducedBy=""></device>,V
+    <device id="QTSI7XS-WGB6RIJ-VGQRLNL-HRN5J4Y-JDBDX3R-QAZPH2A-6VVHNH7-AL6SRQN" name="Nick-Spectre" compression="always" introducer="true" skipIntroductionRemovals="false" introducedBy="">        <address>dynamic</address>    </device>,V
+    <device id="QTSI7XS-WGB6RIJ-VGQRLNL-HRN5J4Y-JDBDX3R-QAZPH2A-6VVHNH7-AL6SRQN" name="Nick-Spectre" compression="always" introducer="true" skipIntroductionRemovals="false" introducedBy="">        <address>dynamic</address>        <paused>false</paused>    </device>,V
   'Action' => 'action',    );    $list->colsSortable = array(      'ID',      'Originator',,v
  ,v
 s,v
