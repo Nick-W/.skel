@@ -20,7 +20,7 @@ UNDERLINE=$(tput smul)
 #Aliases
 alias vim="vim -X"
 alias hc="echo | tee ~/.bash_history | tee ~/.bash_log"
-
+alias btc='curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed "s|^.*,|$|" | sed "s|\(\.[0-9]$\)|\10|"'
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
 #HISTCONTROL=ignoredups:ignorespace
