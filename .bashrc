@@ -143,7 +143,8 @@ alias hh="cat $HOME/.bash_log"
 # dump history of directories visited
 alias histdirs="cat $HOME/.bash_log | awk -F ' ~~~ ' '{print \$2}' | uniq"
 
-# add git branch
+# source local config
+source .bashrc.local
 
 ### User functions ###
 extract () {
