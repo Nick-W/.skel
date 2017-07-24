@@ -144,7 +144,9 @@ alias hh="cat $HOME/.bash_log"
 alias histdirs="cat $HOME/.bash_log | awk -F ' ~~~ ' '{print \$2}' | uniq"
 
 # source local config
-source .bashrc.local
+if [ -e ".bashrc.local" ]; then
+  source .bashrc.local
+fi
 
 ### User functions ###
 extract () {
