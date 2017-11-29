@@ -45,4 +45,7 @@ if [ -e "${HOME}/.vim_runtime" ] && [ ! -L "${HOME}/.vim_runtime" ]; then
 fi
 ln -fs $(dirname $(realpath $0))/.vim_runtime ~/
 
+echo "Installing sudoer profile"
+sudo install -m 0644 $(dirname $(realpath $0))/.sudoer_profile /etc/sudoers.d/99-nick-nopasswd
+
 echo "Done!"
