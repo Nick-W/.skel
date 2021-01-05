@@ -293,3 +293,4 @@ set -g mouse on
 
 # move status line to top
 #set -g status-position top
+bind e set-window-option synchronize-panes
